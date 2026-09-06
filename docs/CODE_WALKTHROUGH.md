@@ -1,5 +1,9 @@
 # InEarth3 핵심 코드 흐름
 
+[개인 기여만 먼저 보기](./PERSONAL_CONTRIBUTIONS.md)
+
+버프 해제 설명은 2026-09-07 수정 후 코드 기준입니다. [원본의 오류와 검증 범위](./BUFF_STATE_FIX.md)를 함께 확인해 주세요.
+
 ## 1. 버프 상태와 수치 분리
 
 중심 파일은 [`MapManager.cs`](../MapManager.cs)입니다.
