@@ -10,13 +10,13 @@ public class MapManager : MonoBehaviour
     public static MapManager instance;
 
     public Monster monster;
-    public int floorLev = 0; //Ãş¼ö 0 = 1Ãş, 1 = 2Ãş, 2 = 3Ãş
-    public int nowProcessNum = 0; // ÁøÇàµµ
-    public int maxProcessNum; //Ãşº° ÃÖ´ë ÁøÇàµµ
+    public int floorLev = 0; //ì¸µìˆ˜ 0 = 1ì¸µ, 1 = 2ì¸µ, 2 = 3ì¸µ
+    public int nowProcessNum = 0; // ì§„í–‰ë„
+    public int maxProcessNum; //ì¸µë³„ ìµœëŒ€ ì§„í–‰ë„
     public int oreCount;
     public TextMeshProUGUI oreCountUIText;
     public int startMana = 3;
-    public List<int> bossRandList;  // Áßº¹µÇÁö ¾Ê´Â º¸½º¿Í ½Î¿ì±â À§ÇØ ½Î¿ü´ø º¸½º ÀúÀå¿ë
+    public List<int> bossRandList;  // ì¤‘ë³µë˜ì§€ ì•ŠëŠ” ë³´ìŠ¤ì™€ ì‹¸ìš°ê¸° ìœ„í•´ ì‹¸ì› ë˜ ë³´ìŠ¤ ì €ì¥ìš©
     public TextMeshProUGUI actionCountUIText;
     public Transform mapImg;
     public Sprite[] sandWatchIcon;
@@ -60,7 +60,7 @@ public class MapManager : MonoBehaviour
             switch (PlayerPrefs.GetInt("savePoint"))
             {
                 case 1:
-                    //¸÷
+                    //ëª¹
                     Curtain.gameObject.SetActive(false);
                     break;
                 case 2:
@@ -87,7 +87,7 @@ public class MapManager : MonoBehaviour
             actionCountText.text = (nowProcessNum) + "/" + maxProcessNum;
             floorText.text = (floorLev + 1).ToString();
             floorImg.sprite = floorSprites[floorLev];
-            for (int i = 0; i < GM.startSkillArray.Length; ++i) //Å×½ºÆ® ¿ëÀ¸·Î ¸ğµç ½ºÅ³À» ´Ù ´ëÀÔ, random.Range ÀÚ¸®¿¡ ½ºÅ³ ·¹º§ ±âÀÔ
+            for (int i = 0; i < GM.startSkillArray.Length; ++i) //í…ŒìŠ¤íŠ¸ ìš©ìœ¼ë¡œ ëª¨ë“  ìŠ¤í‚¬ì„ ë‹¤ ëŒ€ì…, random.Range ìë¦¬ì— ìŠ¤í‚¬ ë ˆë²¨ ê¸°ì…
             {
                 DeckData newCard = new DeckData(GM.startSkillArray[i], 0);
                 GM.customedDeck.Add(newCard);
@@ -210,9 +210,9 @@ public class MapManager : MonoBehaviour
     public TextMeshProUGUI monDmgKindText;
     public TextMeshProUGUI monSkillTriggerTimeText;
     public Image monSkillTriggerTimeImage;
-    public Image monSkillImage;    // À¯Àú¿¡°Ô º¸ÀÌ°Ô ¸ó½ºÅÍ »ç¿ë ½ºÅ³ ÀÌ¹ÌÁö
+    public Image monSkillImage;    // ìœ ì €ì—ê²Œ ë³´ì´ê²Œ ëª¬ìŠ¤í„° ì‚¬ìš© ìŠ¤í‚¬ ì´ë¯¸ì§€
 
-    // ¸ó½ºÅÍ ½ºÅ³ ¹ßµ¿½Ã°£ Ç¥½Ã
+    // ëª¬ìŠ¤í„° ìŠ¤í‚¬ ë°œë™ì‹œê°„ í‘œì‹œ
     public void ShowSkillTriggerTimeUI()
     {
         monSkillTriggerTimeText.text = "" + (int)sm.monSkillTriggerRemainTime;
@@ -243,8 +243,8 @@ public class MapManager : MonoBehaviour
                     iTemp.sprite = myBlocks[i].sb.skillIcon;
                     iTemp.color = (player.mp >= myBlocks[i].cost) ? Color.white : Color.gray;
                     tTemp.Find("cost").GetComponent<TextMeshProUGUI>().text = myBlocks[i].cost.ToString();
-                    //¸¶³ªºÎÁ·ÇÏ¸é È¸»öÃ³¸®
-                    //getchild(0¹è°æ, 1½ºÅ³ÀÌ¹ÌÁö, 2·¹º§(iii), 3ÄÚ½ºÆ®
+                    //ë§ˆë‚˜ë¶€ì¡±í•˜ë©´ íšŒìƒ‰ì²˜ë¦¬
+                    //getchild(0ë°°ê²½, 1ìŠ¤í‚¬ì´ë¯¸ì§€, 2ë ˆë²¨(iii), 3ì½”ìŠ¤íŠ¸
                 }
                 else
                 {
@@ -303,12 +303,12 @@ public class MapManager : MonoBehaviour
             yield return ws;
             if ((willUseDeckList.Count == 0 && usedDeckList.Count == 0))
             {
-                //Debug.Log("µ¦ÀÌ ºñ¾ú½À´Ï´Ù");
+                //Debug.Log("ë±ì´ ë¹„ì—ˆìŠµë‹ˆë‹¤");
                 break;
             }
             else if (player.isGolemDeath)
             {
-                //Debug.Log("°ñ·½Àº Á×¾î ÀÖ½À´Ï´Ù");
+                //Debug.Log("ê³¨ë ˜ì€ ì£½ì–´ ìˆìŠµë‹ˆë‹¤");
                 break;
             }
             if ((player.mp >= checkCostForGetNewBlock() && myBlocks[0].cost < 0) || noCost)
@@ -331,7 +331,7 @@ public class MapManager : MonoBehaviour
                 getNewBlockEffect.SetTrigger("get");
 
 
-                // ºÒ¾¾¿ë Ãß°¡ µå·Î¿ì
+                // ë¶ˆì”¨ìš© ì¶”ê°€ ë“œë¡œìš°
                
                 if (!addDraw)
                 {
@@ -443,7 +443,7 @@ public class MapManager : MonoBehaviour
     }
     public string getInfoText(string info, int val, int target)
     {
-        // Èû½ºÅİ ¾ò±â
+        // í˜ìŠ¤í…Ÿ ì–»ê¸°
         string[] dataArr = info.Split("@");
         string sTemp = "";
         int str = manageBuff(buffState.Atk, target);
@@ -510,7 +510,7 @@ public class MapManager : MonoBehaviour
     {
         for (int j = 0; j < sb.skillVal[i].z; ++j)
         {
-            sb.skillEvent[i].Invoke(new SkillBlock.TriggerData(i, 0));// ½ºÅ³ ÀÌº¥Æ® ¹ßµ¿
+            sb.skillEvent[i].Invoke(new SkillBlock.TriggerData(i, 0));// ìŠ¤í‚¬ ì´ë²¤íŠ¸ ë°œë™
             yield return new WaitForSeconds(0.3f);
         }
     }
@@ -535,7 +535,7 @@ public class MapManager : MonoBehaviour
             getNewEffect(effectTr).StartCoroutine("startAnim", new EffectData(sb.effect[i], sb.effectPos[i].x));
 
             yield return new WaitForSeconds(0.2f);
-            //getNewEffect(effectTr).StartCoroutine("startAnim", new EffectData(sb.effect[i], sb.skillVal[i].z)); //Z ½ºÅ³º° ¹İº¹È½¼ö
+            //getNewEffect(effectTr).StartCoroutine("startAnim", new EffectData(sb.effect[i], sb.skillVal[i].z)); //Z ìŠ¤í‚¬ë³„ ë°˜ë³µíšŸìˆ˜
         }
 
 
@@ -550,12 +550,12 @@ public class MapManager : MonoBehaviour
                 SkillBlock sb = myBlocks[q].sb;
                 if (!sb.isReinforceSkill) usedDeckList.Add(new DeckData(sb, 0));
                 if (player.golemHp < 1) continue;
-                if (sb.skillName == "¿µÈ¥Àı´Ü") continue;
+                if (sb.skillName == "ì˜í˜¼ì ˆë‹¨") continue;
                 for (int i = 0; i < sb.skillEvent.Length; ++i)
                 {
                     for (int j = 0; j < sb.skillVal[i].z; ++j)
                     {
-                        myBlocks[q].sb.skillEvent[i].Invoke(new SkillBlock.TriggerData(i, 0));// ½ºÅ³ ÀÌº¥Æ® ¹ßµ¿
+                        myBlocks[q].sb.skillEvent[i].Invoke(new SkillBlock.TriggerData(i, 0));// ìŠ¤í‚¬ ì´ë²¤íŠ¸ ë°œë™
                     }
                 }
                 for (int i = 0; i < sb.effect.Length; ++i)
@@ -605,7 +605,7 @@ public class MapManager : MonoBehaviour
     delegate void getDmg(int a);
     public IEnumerator continuousAtk(Vector3Int _s)
     {
-        //x´ë»ó, yµ¥¹ÌÁö, zÈ½¼ö
+        //xëŒ€ìƒ, yë°ë¯¸ì§€, zíšŸìˆ˜
         WaitForSeconds ws = new WaitForSeconds(1.0f / _s.z);
         getDmg even;
         switch (_s.x)
@@ -628,7 +628,7 @@ public class MapManager : MonoBehaviour
     }
     IEnumerator atkAudioPlayer(Vector3 _s)
     {
-        // x Ã¹ »ç¿îµå±îÁö µô·¹ÀÌ, y È½¼ö
+        // x ì²« ì‚¬ìš´ë“œê¹Œì§€ ë”œë ˆì´, y íšŸìˆ˜
         WaitForSeconds ws0 = new WaitForSeconds(1.0f / _s.y);
         yield return new WaitForSeconds(_s.x);
         for (int i = 0; i < (int)_s.y; ++i)
@@ -680,9 +680,9 @@ public class MapManager : MonoBehaviour
         [TextArea(5, 15)]
         public string info;
     }
-    //0.Àû, 1.°­Àû, 2.´ëÀå
-    //3.ÀÏ¹İ±¤¹°, 4.È­¿°, 5.¹Ù¶÷, 6.´ëÁö, 7.¹Ù´Ù
-    //8.¹ÌÁö, 9.º¸¹°, 10.ÈŞ½Ä
+    //0.ì , 1.ê°•ì , 2.ëŒ€ì¥
+    //3.ì¼ë°˜ê´‘ë¬¼, 4.í™”ì—¼, 5.ë°”ëŒ, 6.ëŒ€ì§€, 7.ë°”ë‹¤
+    //8.ë¯¸ì§€, 9.ë³´ë¬¼, 10.íœ´ì‹
     public nodeData[] nodeDatas;
 
     [System.Serializable]
@@ -712,7 +712,7 @@ public class MapManager : MonoBehaviour
     {
         bool open = a < 0;
         if (open) a = 0;
-        //¼±ÅÃÀº 0¿ŞÂÊ, 1¿À¸¥ÂÊ¸¸
+        //ì„ íƒì€ 0ì™¼ìª½, 1ì˜¤ë¥¸ìª½ë§Œ
         nowMapData %= next2MapData[a];
         for (int i = 0; i < 2; ++i)
         {
@@ -764,27 +764,27 @@ public class MapManager : MonoBehaviour
                 case equipState.StartMana:
                     player.manaAdd(equipList[i].count);
                     break;
-                //return "½ÃÀÛ½Ã ¸¶³ª¸¦ È¹µæÇÕ´Ï´Ù.";
+                //return "ì‹œì‘ì‹œ ë§ˆë‚˜ë¥¼ íšë“í•©ë‹ˆë‹¤.";
                 case equipState.StartCard:
                     StartCoroutine(getNewBlock(equipList[i].count, false, true));
                     break;
-                //return "½ÃÀÛ½Ã Ä«µå¸¦ »Ì½À´Ï´Ù.";
+                //return "ì‹œì‘ì‹œ ì¹´ë“œë¥¼ ë½‘ìŠµë‹ˆë‹¤.";
                 case equipState.StartGolemHpHeal:
                     player.golemHpAdd(equipList[i].count);
                     break;
-                //return "½ÃÀÛ½Ã °ñ·¥ÀÌ Ã¼·ÂÀ» ¾ò½À´Ï´Ù.";
+                //return "ì‹œì‘ì‹œ ê³¨ë¨ì´ ì²´ë ¥ì„ ì–»ìŠµë‹ˆë‹¤.";
                 case equipState.StartMonsterDelay:
                     sm.monsterDelay += equipList[i].count;
                     break;
-                //return "½ÃÀÛ½Ã ÀûÀÌ ´õ ¿À·¡ µô·¹ÀÌ¸¦ °¡Áı´Ï´Ù.";
+                //return "ì‹œì‘ì‹œ ì ì´ ë” ì˜¤ë˜ ë”œë ˆì´ë¥¼ ê°€ì§‘ë‹ˆë‹¤.";
                 case equipState.StartGetOre:
                     oreCount += equipList[i].count;
                     showOreUIText();
                     break;
-                //return "½ÃÀÛ½Ã µ·À» ¾ò½À´Ï´Ù.";
+                //return "ì‹œì‘ì‹œ ëˆì„ ì–»ìŠµë‹ˆë‹¤.";
                 case equipState.StartGetWill:
                     getBuffNewVersion(buffState.Will, equipList[i].count, 0);
-                    //return "½ÃÀÛ½Ã ÀÇÁö¸¦ ¾ò½À´Ï´Ù.";
+                    //return "ì‹œì‘ì‹œ ì˜ì§€ë¥¼ ì–»ìŠµë‹ˆë‹¤.";
                     break;
                 case equipState.StartGetMpRegen:
                     getBuffNewVersion(buffState.MpRegen, equipList[i].count, 0);
@@ -809,10 +809,10 @@ public class MapManager : MonoBehaviour
     public Animator getPlayerAddHpAnim, getGolemAddHpAnim;
     public void checkEvent(int a)
     {
-        //0.Àû, 1.°­Àû, 2.´ëÀå
-        //3.ÀÏ¹İ±¤¹°, 4.È­¿°, 5.¹Ù¶÷, 6.´ëÁö, 7.¹Ù´Ù
-        //8.¹ÌÁö, 9.º¸¹°, 10.ÈŞ½Ä 11.ºÒ·¯¿À±â
-        //a°¡ 3À» ³Ñ°Å³ª
+        //0.ì , 1.ê°•ì , 2.ëŒ€ì¥
+        //3.ì¼ë°˜ê´‘ë¬¼, 4.í™”ì—¼, 5.ë°”ëŒ, 6.ëŒ€ì§€, 7.ë°”ë‹¤
+        //8.ë¯¸ì§€, 9.ë³´ë¬¼, 10.íœ´ì‹ 11.ë¶ˆëŸ¬ì˜¤ê¸°
+        //aê°€ 3ì„ ë„˜ê±°ë‚˜
         EventGab = a;
         try
         {
@@ -841,7 +841,7 @@ public class MapManager : MonoBehaviour
                     getNewOre(nowMapData.myNode[EventGab]);
                     showOreUIText();
                     nextEvent();
-                    //±¤¼®¾ò±â
+                    //ê´‘ì„ì–»ê¸°
                     break;
                 case 8:
                     int ran = Random.Range(-2, GM.events.Length);
@@ -876,7 +876,7 @@ public class MapManager : MonoBehaviour
                     break;
                 default:
                     nextEvent(new Vector3Int(1, 0, 0));
-                    //´ÙÀ½³ëµå ¼±ÅÃ
+                    //ë‹¤ìŒë…¸ë“œ ì„ íƒ
                     break;
             }
         }
@@ -886,7 +886,7 @@ public class MapManager : MonoBehaviour
         }
 
 
-        //½ºµª¼ö ¿Ã·ÁÁÖ±â
+        //ìŠ¤ëìˆ˜ ì˜¬ë ¤ì£¼ê¸°
     }
     public Transform eventUI;
     public void eventsSetting(unknownEventST st)
@@ -984,7 +984,7 @@ public class MapManager : MonoBehaviour
     {
         if (vTemp.x == 1 && Curtain.gameObject.activeSelf)
         {
-            //ÀÌ¹Ì ¿­·ÁÀÖÀ¸¸é
+            //ì´ë¯¸ ì—´ë ¤ìˆìœ¼ë©´
             if (floorLev == 3)
             {
                 Curtain.gameObject.SetActive(false);
@@ -992,21 +992,21 @@ public class MapManager : MonoBehaviour
                 sm.monTier = 4;
                 sm.isBoss = true;
                 changeBGM(2);
-                actionCountText.text = "±¤±âÀÇ °ñ·½";
+                actionCountText.text = "ê´‘ê¸°ì˜ ê³¨ë ˜";
                 floorLev = 4;
                 sm.MonsterInit();
             }
             else if (nowProcessNum >= maxProcessNum)
             {
                 Curtain.gameObject.SetActive(false);
-                //Çöº¸½º
+                //í˜„ë³´ìŠ¤
                 int a = Random.Range(0, bossRandList.Count);
                 monster = GM.leaderMonsters[bossRandList[a]];
                 sm.isBoss = true;
                 bossRandList.RemoveAt(a);
                 nowProcessNum = 0;
                 ++floorLev;
-                actionCountText.text = "´ëÀå";
+                actionCountText.text = "ëŒ€ì¥";
                 floorText.text = (floorLev + 1).ToString();
                 floorImg.sprite = floorSprites[floorLev];
                 sm.MonsterInit();
@@ -1036,8 +1036,8 @@ public class MapManager : MonoBehaviour
         {
             tTemp.GetChild(i).gameObject.SetActive(false);
         }
-        //x, 0: ´İ±â 1: ¿­±â
-        //y, 0: ³ëµå¼±ÅÃ 1: Ä«µå¼±ÅÃ 2:ÀÌº¥Æ®
+        //x, 0: ë‹«ê¸° 1: ì—´ê¸°
+        //y, 0: ë…¸ë“œì„ íƒ 1: ì¹´ë“œì„ íƒ 2:ì´ë²¤íŠ¸
         float end;
         if (vTemp.x == 0)
         {
@@ -1078,11 +1078,11 @@ public class MapManager : MonoBehaviour
         switch (a)
         {
             case 0:
-                //³ëµå¼±ÅÃ
+                //ë…¸ë“œì„ íƒ
                 GM.saveGameProgress(5);
                 break;
             case 1:
-                //»õ Ä«µå¼±ÅÃ
+                //ìƒˆ ì¹´ë“œì„ íƒ
                 openGetCardPenal();
                 break;
             default:
@@ -1095,7 +1095,7 @@ public class MapManager : MonoBehaviour
     public int[,] skillTierPercentCluster = new int[3, 3] { { 9, 5, 1 }, { 7, 4, 1 }, { 4, 2, 1 } };
     public List<int>[] newSkillBlocks = new List<int>[3];
 
-    public void settingAbletoHave() // ÆÄÃ÷ º°·Î °ñ·½ ¼Ó¼º Ã¼Å© ÇÔ¼ö
+    public void settingAbletoHave() // íŒŒì¸  ë³„ë¡œ ê³¨ë ˜ ì†ì„± ì²´í¬ í•¨ìˆ˜
     {
         int[] element = { 0, 0, 0, 0 };
         int max = 0;
@@ -1120,7 +1120,7 @@ public class MapManager : MonoBehaviour
         }
         GM.settingAllSkillSet(use);
         checkShildPersentSetting(use);
-        GM.saveGameProgress(use);    // ¸ğµç Á¤º¸ ÀúÀå
+        GM.saveGameProgress(use);    // ëª¨ë“  ì •ë³´ ì €ì¥
     }
     SkillBlock[] cardPenalCard;
     public void openGetCardPenal()
@@ -1133,15 +1133,15 @@ public class MapManager : MonoBehaviour
             //newSkillBlock[i] = newSkillBlocks[Random.Range(0, newSkillBlocks.Count)];
             int a = Random.Range(0, percentSum);
             SkillBlock sb = new SkillBlock();
-            if (a < newSkillTierPercent[0]) //³ë¸»
+            if (a < newSkillTierPercent[0]) //ë…¸ë§
             {
                 cardPenalCard[i] = GM.allSkillArrayNormal[Random.Range(0, GM.allSkillArrayNormal.Count)];
             }
-            else if (a >= newSkillTierPercent[0] + newSkillTierPercent[1]) //È÷µç
+            else if (a >= newSkillTierPercent[0] + newSkillTierPercent[1]) //íˆë“ 
             {
                 cardPenalCard[i] = GM.allSkillArrayHidden[Random.Range(0, GM.allSkillArrayHidden.Count)];
             }
-            else  //·¹¾î
+            else  //ë ˆì–´
             {
                 cardPenalCard[i] = GM.allSkillArrayRare[Random.Range(0, GM.allSkillArrayRare.Count)];
             }
@@ -1176,7 +1176,7 @@ public class MapManager : MonoBehaviour
     {
         if (!canSelectNewCard && a != 3) return;
         canSelectNewCard = false;
-        //0,1,2 Ä«µå 3, ¼±ÅÃÃë¼Ò
+        //0,1,2 ì¹´ë“œ 3, ì„ íƒì·¨ì†Œ
         if (a == 3)
         {
             GM.btnSound[1].Play();
@@ -1215,9 +1215,9 @@ public class MapManager : MonoBehaviour
     {
         int itemPercent = 0;
         int enemyPernect = 0;
-        //0.Àû, 1.°­Àû, 2.´ëÀå
-        //3.ÀÏ¹İ±¤¹°, 4.È­¿°, 5.¹Ù¶÷, 6.´ëÁö, 7.¹Ù´Ù
-        //8.¹ÌÁö, 9.º¸¹°, 10.ÈŞ½Ä
+        //0.ì , 1.ê°•ì , 2.ëŒ€ì¥
+        //3.ì¼ë°˜ê´‘ë¬¼, 4.í™”ì—¼, 5.ë°”ëŒ, 6.ëŒ€ì§€, 7.ë°”ë‹¤
+        //8.ë¯¸ì§€, 9.ë³´ë¬¼, 10.íœ´ì‹
         for (int i = 0; i < 4; ++i)
         {
             switch (preb.myNode[i].x)
@@ -1250,14 +1250,14 @@ public class MapManager : MonoBehaviour
             if (set.myNode[count].x < 0)
             {
                 set.myNode[count].y = 0;
-                //¾ÆÀÌÅÛ ¾ø½¿
+                //ì•„ì´í…œ ì—†ìŠ´
             }
             else
             {
                 set.myNode[count].x = Random.Range(3, 8);
-                //ÀÌ¾¸
+                //ì´ì”€
                 count++;
-                //¾ó¸¸Å­ ÁÙ·¡?
+                //ì–¼ë§Œí¼ ì¤„ë˜?
                 set.myNode[count].y = itemPercent;
             }
 
@@ -1265,13 +1265,13 @@ public class MapManager : MonoBehaviour
             if (set.myNode[count].x < 0)
             {
                 set.myNode[count].y = 0;
-                //Àû ¾ø½¿
+                //ì  ì—†ìŠ´
             }
             else
             {
-                //ÀÌ¾¸
+                //ì´ì”€
                 count++;
-                //¾ó¸¸Å­ ÁÙ·¡?
+                //ì–¼ë§Œí¼ ì¤„ë˜?
                 set.myNode[count].y = enemyPernect;
             }
 
@@ -1281,15 +1281,15 @@ public class MapManager : MonoBehaviour
                 if (set.myNode[count].x < 0)
                 {
                     set.myNode[count].y = 0;
-                    //ÀÌº¥Æ® ¾ø½¿
+                    //ì´ë²¤íŠ¸ ì—†ìŠ´
                 }
                 else
                 {
-                    //ÀÌ¾¸
-                    //8.¹ÌÁö, 9.º¸¹°, 10.ÈŞ½Ä
+                    //ì´ì”€
+                    //8.ë¯¸ì§€, 9.ë³´ë¬¼, 10.íœ´ì‹
                     set.myNode[count].x = (Random.Range(0, 2) == 0) ? 8 : 10;
                     count++;
-                    //¾ó¸¸Å­ ÁÙ·¡?
+                    //ì–¼ë§Œí¼ ì¤„ë˜?
                     set.myNode[count].y = itemPercent;
                 }
             }
@@ -1327,13 +1327,13 @@ public class MapManager : MonoBehaviour
         manaResenText.text = "+" + player.checkManaRegen();
         if (up)
         {
-            //µÚ°¡ ¸ÕÀú¿À¸£°í ¾Õ
+            //ë’¤ê°€ ë¨¼ì €ì˜¤ë¥´ê³  ì•
             manaImgBack.color = Color.green;
             manaImgBack.fillAmount = player.mp / player.checkMaxMana();
         }
         else
         {
-            //¾ÕÀÌ ¸ÕÀú¿À¸£°í µÚ
+            //ì•ì´ ë¨¼ì €ì˜¤ë¥´ê³  ë’¤
             manaImgBack.color = Color.red;
             manaImg.fillAmount = player.mp / player.checkMaxMana();
         }
@@ -1350,7 +1350,7 @@ public class MapManager : MonoBehaviour
         newCard.GetChild(4).GetComponent<TextMeshProUGUI>().text = deckData.cost.ToString();
         newCard.GetChild(5).GetComponent<TextMeshProUGUI>().text = sb.skillName;
         newCard.GetChild(6).GetComponent<TextMeshProUGUI>().text = getInfoText(sb.info, sb.skillVal[0].y, 0);
-        //newCard.GetChild().GetComponent<TextMeshProUGUI>().text = newCard.lev.ToString(); //¸¸¾à ·¹º§µµ Ä«µå¿¡ Ãâ·ÂÇÑ´Ù¸é
+        //newCard.GetChild().GetComponent<TextMeshProUGUI>().text = newCard.lev.ToString(); //ë§Œì•½ ë ˆë²¨ë„ ì¹´ë“œì— ì¶œë ¥í•œë‹¤ë©´
     }
     public TextMeshProUGUI playerHpUI;
     public Image playerHpBar;
@@ -1570,7 +1570,7 @@ public class MapManager : MonoBehaviour
     public int dmgTextCount;
     public List<Transform> dmgTextList;
     public Color[] dmgTextColor;
-    public Transform showDmg(int a, int type) //0 -µ¥¹ÌÁö ÁÜ, 1- µ¥¹ÌÁö ¹ŞÀ½ 2- È¸º¹ 3- ¸¶³ª È¸º¹
+    public Transform showDmg(int a, int type) //0 -ë°ë¯¸ì§€ ì¤Œ, 1- ë°ë¯¸ì§€ ë°›ìŒ 2- íšŒë³µ 3- ë§ˆë‚˜ íšŒë³µ
     {
         dmgTextCount %= 33;
         dmgTextCount++;
@@ -1598,34 +1598,34 @@ public class MapManager : MonoBehaviour
     public List<equipInfo> equipList = new List<equipInfo>();
     public class equipInfo
     {
-        public equipState buffSort; //¹öÇÁ Á¾·ù
-        public int target; // ¹öÇÁ ´ë»ó
+        public equipState buffSort; //ë²„í”„ ì¢…ë¥˜
+        public int target; // ë²„í”„ ëŒ€ìƒ
         public Transform myUI;
-        public int count; //ÁßÃ¸ ¼ö
+        public int count; //ì¤‘ì²© ìˆ˜
         public string getName()
         {
             switch (buffSort)
             {
                 case equipState.StartMana:
-                    return "¸¶³ª";
+                    return "ë§ˆë‚˜";
                 case equipState.StartCard:
-                    return "±Ù¿ø";
+                    return "ê·¼ì›";
                 case equipState.StartGolemHpHeal:
-                    return "¿Ïµå";
+                    return "ì™„ë“œ";
                 case equipState.StartMonsterDelay:
-                    return "¼Òµå";
+                    return "ì†Œë“œ";
                 case equipState.StartGetOre:
-                    return "ÆæÅ¸Å¬";
+                    return "íœíƒ€í´";
                 case equipState.StartGetWill:
-                    return "ÄÅ";
+                    return "ì»µ";
                 case equipState.StartGetMpRegen:
-                    return "¹Ùº¸";
+                    return "ë°”ë³´";
                 case equipState.StartGetHealBuff:
-                    return "¿¬ÀÎ";
+                    return "ì—°ì¸";
                 case equipState.StartGetDexBuff:
-                    return "¸¶¹ı»ç";
+                    return "ë§ˆë²•ì‚¬";
                 case equipState.StartGetThreeBuff:
-                    return "¼¼°è";
+                    return "ì„¸ê³„";
                 default:
                     return "";
             }
@@ -1635,25 +1635,25 @@ public class MapManager : MonoBehaviour
             switch (buffSort)
             {
                 case equipState.StartMana:
-                    return "½ÃÀÛ½Ã ¸¶³ª¸¦ È¹µæÇÕ´Ï´Ù.";
+                    return "ì‹œì‘ì‹œ ë§ˆë‚˜ë¥¼ íšë“í•©ë‹ˆë‹¤.";
                 case equipState.StartCard:
-                    return "½ÃÀÛ½Ã Ä«µå¸¦ »Ì½À´Ï´Ù.";
+                    return "ì‹œì‘ì‹œ ì¹´ë“œë¥¼ ë½‘ìŠµë‹ˆë‹¤.";
                 case equipState.StartGolemHpHeal:
-                    return "½ÃÀÛ½Ã °ñ·¥ÀÌ Ã¼·ÂÀ» ¾ò½À´Ï´Ù.";
+                    return "ì‹œì‘ì‹œ ê³¨ë¨ì´ ì²´ë ¥ì„ ì–»ìŠµë‹ˆë‹¤.";
                 case equipState.StartMonsterDelay:
-                    return "½ÃÀÛ½Ã ÀûÀÌ ´õ ¿À·¡ µô·¹ÀÌ¸¦ °¡Áı´Ï´Ù.";
+                    return "ì‹œì‘ì‹œ ì ì´ ë” ì˜¤ë˜ ë”œë ˆì´ë¥¼ ê°€ì§‘ë‹ˆë‹¤.";
                 case equipState.StartGetOre:
-                    return "½ÃÀÛ½Ã ±¤¹°À» ¾ò½À´Ï´Ù.";
+                    return "ì‹œì‘ì‹œ ê´‘ë¬¼ì„ ì–»ìŠµë‹ˆë‹¤.";
                 case equipState.StartGetWill:
-                    return "½ÃÀÛ½Ã ÀÇÁö¸¦ ¾ò½À´Ï´Ù.";
+                    return "ì‹œì‘ì‹œ ì˜ì§€ë¥¼ ì–»ìŠµë‹ˆë‹¤.";
                 case equipState.StartGetMpRegen:
-                    return "½ÃÀÛ½Ã ¼øÈ¯À» ¾ò½À´Ï´Ù.";
+                    return "ì‹œì‘ì‹œ ìˆœí™˜ì„ ì–»ìŠµë‹ˆë‹¤.";
                 case equipState.StartGetHealBuff:
-                    return "½ÃÀÛ½Ã Áö´ÉÀ» ¾ò½À´Ï´Ù.";
+                    return "ì‹œì‘ì‹œ ì§€ëŠ¥ì„ ì–»ìŠµë‹ˆë‹¤.";
                 case equipState.StartGetDexBuff:
-                    return "½ÃÀÛ½Ã ¹ÎÃ¸À» ¾ò½À´Ï´Ù.";
+                    return "ì‹œì‘ì‹œ ë¯¼ì²©ì„ ì–»ìŠµë‹ˆë‹¤.";
                 case equipState.StartGetThreeBuff:
-                    return "½ÃÀÛ½Ã Èû, ¹ÎÃ¸, Áö´ÉÀ» ¾ò½À´Ï´Ù.";
+                    return "ì‹œì‘ì‹œ í˜, ë¯¼ì²©, ì§€ëŠ¥ì„ ì–»ìŠµë‹ˆë‹¤.";
                 default:
                     return "";
             }
@@ -1730,40 +1730,40 @@ public class MapManager : MonoBehaviour
 
     public class buffInfoNew
     {
-        public buffState buffSort; //¹öÇÁ Á¾·ù
-        public int target; // ¹öÇÁ ´ë»ó
+        public buffState buffSort; //ë²„í”„ ì¢…ë¥˜
+        public int target; // ë²„í”„ ëŒ€ìƒ
         public Transform myUI;
-        public int count; //ÁßÃ¸ ¼ö
+        public int count; //ì¤‘ì²© ìˆ˜
         public SkillBlock skillblock;
     }
     public List<buffInfoNew>[] buffListNew = new List<buffInfoNew>[3];
     public enum buffState { Atk = 0, Dex, Heal, MpRegen, Intel, MaxHp, Def, HpRegen, Reflect, Ember, 
         FriendlyFire, Smelting, Combustion, Will, CurseBlade, PainToMp, CardUseToMaxHpBuff, SmallAtkToReflect, PainToGetSpecificCard, Time };
 
-    //À¯Àú : Èû(°ø°İ¼öÄ¡), ¹ÎÃ¸(¹æ¾îµµ¼öÄ¡), Áö´É(Ä¡À¯), ¼øÈ¯(¸¶³ªÈ¸º¹), ÃÑ¸í(¸¶³ªº¯µ¿), 
-    //°ñ·½ : ¹æ¾îµµ(ÃÖ´ë Ã¼·Âº¯µ¿), °©¿Ê(ÇÇÇØº¯µ¿), °Ç°­(Áö¼Ó Ã¼·ÂÈ¸º¹,°¨¼Ò), °¡½Ã(ÇÇÇØ¹İ»ç)
+    //ìœ ì € : í˜(ê³µê²©ìˆ˜ì¹˜), ë¯¼ì²©(ë°©ì–´ë„ìˆ˜ì¹˜), ì§€ëŠ¥(ì¹˜ìœ ), ìˆœí™˜(ë§ˆë‚˜íšŒë³µ), ì´ëª…(ë§ˆë‚˜ë³€ë™),
+    //ê³¨ë ˜ : ë°©ì–´ë„(ìµœëŒ€ ì²´ë ¥ë³€ë™), ê°‘ì˜·(í”¼í•´ë³€ë™), ê±´ê°•(ì§€ì† ì²´ë ¥íšŒë³µ,ê°ì†Œ), ê°€ì‹œ(í”¼í•´ë°˜ì‚¬)
 
-    //ºÒ¾¾(ºÒ¼Ó¼º Ä«µå »ÌÀ¸¸é Ãß°¡ µå·Î¿ì), È­¿°Ä£È­(ºÒ¼Ó¼º Ä«µå µ¥¹ÌÁö Áõ°¡), Á¦·Ã(Ä«µå »ÌÀ»¶§¸¶´Ù ¹æ¾îµµ Áõ°¡), ¿¬¼Ò(¹æ¾îµµ ½×À»¶§¸¶´Ù Àû¿¡°Ô ÇÇÇØ 5)
-    //ÀÇÁö(´ÙÀ½ ½ºÅ³ »ç¿ë½Ã ÄÚ½ºÆ® 0)
-    //ÀúÁÖ¹ŞÀº Ä®³¯ : °ø°İ½Ã Àû¿¡°Ô °Ç°­ -1 ¹öÇÁ ºÎ¿©ÇÔ
-    //ÇÇÇØ ÀÔÀ¸¸é MP ¾òÀ½
-    //5ÀÌÇÏ ÇÇÇØ¿¡ Æ¯Á¤ µ¥¹ÌÁö ¹İ»ç
-    //ÇÇÇØ ÀÔÀ¸¸é Æ¯Á¤ Ä«µå È¹µæ
-    //Ä«µå »ç¿ë½Ã ¹æ¾îµµ È¹µæ
+    //ë¶ˆì”¨(ë¶ˆì†ì„± ì¹´ë“œ ë½‘ìœ¼ë©´ ì¶”ê°€ ë“œë¡œìš°), í™”ì—¼ì¹œí™”(ë¶ˆì†ì„± ì¹´ë“œ ë°ë¯¸ì§€ ì¦ê°€), ì œë ¨(ì¹´ë“œ ë½‘ì„ë•Œë§ˆë‹¤ ë°©ì–´ë„ ì¦ê°€), ì—°ì†Œ(ë°©ì–´ë„ ìŒ“ì„ë•Œë§ˆë‹¤ ì ì—ê²Œ í”¼í•´ 5)
+    //ì˜ì§€(ë‹¤ìŒ ìŠ¤í‚¬ ì‚¬ìš©ì‹œ ì½”ìŠ¤íŠ¸ 0)
+    //ì €ì£¼ë°›ì€ ì¹¼ë‚  : ê³µê²©ì‹œ ì ì—ê²Œ ê±´ê°• -1 ë²„í”„ ë¶€ì—¬í•¨
+    //í”¼í•´ ì…ìœ¼ë©´ MP ì–»ìŒ
+    //5ì´í•˜ í”¼í•´ì— íŠ¹ì • ë°ë¯¸ì§€ ë°˜ì‚¬
+    //í”¼í•´ ì…ìœ¼ë©´ íŠ¹ì • ì¹´ë“œ íšë“
+    //ì¹´ë“œ ì‚¬ìš©ì‹œ ë°©ì–´ë„ íšë“
     public int setBuffStateGab(int gab, buffState buffType)
     {
         return gab | buffStateCodeFilter((int)buffType + 1).x;
     }
     public int removeBuffStateGab(int gab, buffState buffType)
     {
-        int a = 0;
-        a = ~(a | (0b1 << (int)buffType));
-        return gab & a;
+        // í™œì„±í™”Â·ì¡°íšŒì™€ ê°™ì€ ë¹„íŠ¸ ìœ„ì¹˜ë¥¼ ì‚¬ìš©í•´ ê¸°ì¡´ ìƒíƒœ í‘œí˜„ì„ ìœ ì§€í•©ë‹ˆë‹¤.
+        int mask = buffStateCodeFilter((int)buffType + 1).x;
+        return gab & ~mask;
     }
     public int getBuffStateGab(int gab, buffState buffType)
     {
-        // ÇØ´ç À§Ä¡°ªÀ» 1°ú bit and
-        // ´Ù½Ã ¿øÀ§Ä¡ ÇØ¼­ µ¹·ÁÁÜ
+        // í•´ë‹¹ ìœ„ì¹˜ê°’ì„ 1ê³¼ bit and
+        // ë‹¤ì‹œ ì›ìœ„ì¹˜ í•´ì„œ ëŒë ¤ì¤Œ
         Vector2Int filter = buffStateCodeFilter((int)buffType + 1);
         return (gab & filter.x) >> filter.y;
     }
@@ -1777,22 +1777,22 @@ public class MapManager : MonoBehaviour
         return Vector2Int.zero;
     }
 
-    public int[] BuffState = new int[3] { 0, 0, 0 }; // 0 - ÇÃ·¹ÀÌ¾î, 1 - °ñ·½, 2 - Àû
+    public int[] BuffState = new int[3] { 0, 0, 0 }; // 0 - í”Œë ˆì´ì–´, 1 - ê³¨ë ˜, 2 - ì 
 
 
     public void getBuffNewVersion(buffState buffSort, int gab, int target, SkillBlock sb = null, bool checkDex = true)
     {
-        //¹öÇÁ´Â °É¸®´Â ´çÀåÃ³¸®x ½ºÅ³ºí·°¾µ¶§¸¶´Ù ¹öÇÁÃ¢ Å½»ö
-        //À§¿¡¼­ºÎÅÍ 0, 1, 2 ...
-        // 0 -  °ø°İ·Â, 1 - ÃÖ´ëÃ¼·Â, 2 - È¸º¹Ä«µå »ç¿ë½Ã Àû¿ëµÇ´Â È¸º¹·Â
-        // 3 - ¸¶³ª¸®Á¨, 4 - ¸¶³ª ÃÖ´ëÄ¡, 5 - ¹æ¾î·Â, 6 - ÃÊ´ç È¸º¹·®, 7 - ÇÇÇØ¹İ»ç·®
-        //À¯Àú : Èû(°ø°İ¼öÄ¡), ¹ÎÃ¸(¹æ¾îµµ¼öÄ¡), Áö´É(Ä¡À¯), ¼øÈ¯(¸¶³ªÈ¸º¹), ÃÑ¸í(¸¶³ªº¯µ¿) 
-        //°ñ·½ : ¹æ¾îµµ(ÃÖ´ë Ã¼·Âº¯µ¿), °©¿Ê(ÇÇÇØº¯µ¿), °Ç°­(Áö¼Ó Ã¼·ÂÈ¸º¹,°¨¼Ò), °¡½Ã(ÇÇÇØ¹İ»ç)
-        //Æ¯¼ö :<<ÆÄ¿ö¾÷Ä«µå°¡ »ı±æ¶§ ¸¶´Ù Ãß°¡
+        //ë²„í”„ëŠ” ê±¸ë¦¬ëŠ” ë‹¹ì¥ì²˜ë¦¬x ìŠ¤í‚¬ë¸”ëŸ­ì“¸ë•Œë§ˆë‹¤ ë²„í”„ì°½ íƒìƒ‰
+        //ìœ„ì—ì„œë¶€í„° 0, 1, 2 ...
+        // 0 -  ê³µê²©ë ¥, 1 - ìµœëŒ€ì²´ë ¥, 2 - íšŒë³µì¹´ë“œ ì‚¬ìš©ì‹œ ì ìš©ë˜ëŠ” íšŒë³µë ¥
+        // 3 - ë§ˆë‚˜ë¦¬ì  , 4 - ë§ˆë‚˜ ìµœëŒ€ì¹˜, 5 - ë°©ì–´ë ¥, 6 - ì´ˆë‹¹ íšŒë³µëŸ‰, 7 - í”¼í•´ë°˜ì‚¬ëŸ‰
+        //ìœ ì € : í˜(ê³µê²©ìˆ˜ì¹˜), ë¯¼ì²©(ë°©ì–´ë„ìˆ˜ì¹˜), ì§€ëŠ¥(ì¹˜ìœ ), ìˆœí™˜(ë§ˆë‚˜íšŒë³µ), ì´ëª…(ë§ˆë‚˜ë³€ë™)
+        //ê³¨ë ˜ : ë°©ì–´ë„(ìµœëŒ€ ì²´ë ¥ë³€ë™), ê°‘ì˜·(í”¼í•´ë³€ë™), ê±´ê°•(ì§€ì† ì²´ë ¥íšŒë³µ,ê°ì†Œ), ê°€ì‹œ(í”¼í•´ë°˜ì‚¬)
+        //íŠ¹ìˆ˜ :<<íŒŒì›Œì—…ì¹´ë“œê°€ ìƒê¸¸ë•Œ ë§ˆë‹¤ ì¶”ê°€
 
-        //ºÒ¾¾(È­¿°·ù Ä«µå¸¦ »ÌÀ»¶§ ¸¶´Ù Ä«µå¸¦ nÀå´õ »Ì½À´Ï´Ù)
-        //È­¿° Ä£È­(È­¿°·ù Ä«µå°¡ nÀÇ ÇÇÇØ¸¦ ´õ Áİ´Ï´Ù.)
-        //Á¦·Ã(Ä«µå¸¦ »ÌÀ» ¶§ ¸¶´Ù ¹æ¾îµµ¸¦ n ¾ò½À´Ï´Ù.)
+        //ë¶ˆì”¨(í™”ì—¼ë¥˜ ì¹´ë“œë¥¼ ë½‘ì„ë•Œ ë§ˆë‹¤ ì¹´ë“œë¥¼ nì¥ë” ë½‘ìŠµë‹ˆë‹¤)
+        //í™”ì—¼ ì¹œí™”(í™”ì—¼ë¥˜ ì¹´ë“œê°€ nì˜ í”¼í•´ë¥¼ ë” ì¤ë‹ˆë‹¤.)
+        //ì œë ¨(ì¹´ë“œë¥¼ ë½‘ì„ ë•Œ ë§ˆë‹¤ ë°©ì–´ë„ë¥¼ n ì–»ìŠµë‹ˆë‹¤.)
         if (sm.monsterDeath || gab == 0) return;
         if (target == 1 && player.isGolemDeath) return;
 
@@ -1807,7 +1807,7 @@ public class MapManager : MonoBehaviour
             {
                 for (int i = 0; i < buffListNew[1].Count; ++i)
                 {
-                    if (buffListNew[1][i].buffSort == MapManager.buffState.Combustion)  //combustionÀÇ ½ºÅ³ºí·°À» °¡Á®¿Í¾ß µÇ¼­ ÀÌ·¸°Ô ³öµÒ
+                    if (buffListNew[1][i].buffSort == MapManager.buffState.Combustion)  //combustionì˜ ìŠ¤í‚¬ë¸”ëŸ­ì„ ê°€ì ¸ì™€ì•¼ ë˜ì„œ ì´ë ‡ê²Œ ë†”ë‘ 
                     {
                         SkillBlock block = buffListNew[1][i].skillblock;
                         StartCoroutine("effectCoroutine", block);
@@ -1827,7 +1827,7 @@ public class MapManager : MonoBehaviour
 
 
 
-        //ÀûÀº µÑ´Ù!
+        //ì ì€ ë‘˜ë‹¤!
         if (getBuffStateGab(BuffState[target], buffSort) == 1)
         {
             for (int i = 0; i < buffListNew[target].Count; ++i)
@@ -1852,7 +1852,7 @@ public class MapManager : MonoBehaviour
             }
         }
         Transform ui = buffUITransform(target);
-        // Áßº¹¹öÇÁ Ã³¸®
+        // ì¤‘ë³µë²„í”„ ì²˜ë¦¬
         var bf = new buffInfoNew
         {
             buffSort = buffSort,
@@ -1873,7 +1873,7 @@ public class MapManager : MonoBehaviour
     }
 
 
-    public void buffImmediate(buffState buffSort, int target, int val)//Áï½Ã Àû¿ë ÆÄÆ®
+    public void buffImmediate(buffState buffSort, int target, int val)//ì¦‰ì‹œ ì ìš© íŒŒíŠ¸
     {
         switch (buffSort)
         {
@@ -1883,14 +1883,14 @@ public class MapManager : MonoBehaviour
                 break;
             case buffState.MaxHp:
 
-                if (target < 2) // ÀÎÇü, °ñ·½
+                if (target < 2) // ì¸í˜•, ê³¨ë ˜
                 {
                     float addHps = val - player.addGolemMaxHp;
                     player.addGolemMaxHp = val;
                     if (addHps > 0) player.golemHp += addHps;
                     showGolemHpUI();
                 }
-                else  // Àû
+                else  // ì 
                 {
                     int a = val - sm.monAddHp;
                     sm.monAddHp = val;
@@ -1917,25 +1917,25 @@ public class MapManager : MonoBehaviour
         switch (bs)
         {
             case buffState.HpRegen:
-                return "°Ç°­";
+                return "ê±´ê°•";
             case buffState.Dex:
-                return "¹ÎÃ¸";
+                return "ë¯¼ì²©";
             case buffState.Atk:
-                return "Èû";
+                return "í˜";
             case buffState.Heal:
-                return "Áö´É";
+                return "ì§€ëŠ¥";
             case buffState.MpRegen:
-                return "¼øÈ¯";
+                return "ìˆœí™˜";
             case buffState.Intel:
-                return "ÃÑ¸í";
+                return "ì´ëª…";
             case buffState.MaxHp:
-                return "¹æ¾îµµ";
+                return "ë°©ì–´ë„";
             case buffState.Def:
-                return "°©¿Ê";
+                return "ê°‘ì˜·";
             case buffState.Reflect:
-                return "°¡½Ã";
+                return "ê°€ì‹œ";
             case buffState.Will:
-                return "ÀÇÁö";
+                return "ì˜ì§€";
         }
         return "";
     }
@@ -1980,7 +1980,7 @@ public class MapManager : MonoBehaviour
         showGolemHpUI();
         showPlayerHpUI();
     }
-    public int manageBuff(buffState buffSort, int target, int kind = 0) // 0 - ¹öÇÁ ½ºÅØ ¹İÈ¯ 1 - ¹öÇÁ Á¦°Å, 2 - ¹öÇÁ ½ºÅØ ¹İÈ¯µÚ ¹öÇÁ Á¦°Å
+    public int manageBuff(buffState buffSort, int target, int kind = 0) // 0 - ë²„í”„ ìŠ¤í… ë°˜í™˜ 1 - ë²„í”„ ì œê±°, 2 - ë²„í”„ ìŠ¤í… ë°˜í™˜ë’¤ ë²„í”„ ì œê±°
     {
         try
         {
@@ -1992,11 +1992,13 @@ public class MapManager : MonoBehaviour
                     if (kind == 0) { return buffListNew[target][i].count; }
                     else
                     {
-                        if (kind == 2) return buffListNew[target][i].count;
-                        BuffState[target] = removeBuffStateGab(target, buffSort);
+                        // ì‚­ì œ ì „ ì¤‘ì²© ìˆ˜ë¥¼ ë³´ê´€í•˜ê³ , ëŒ€ìƒ ë²ˆí˜¸ê°€ ì•„ë‹Œ ì‹¤ì œ ë¹„íŠ¸ ìƒíƒœë¥¼ ê°±ì‹ í•©ë‹ˆë‹¤.
+                        int removedCount = buffListNew[target][i].count;
+                        BuffState[target] = removeBuffStateGab(BuffState[target], buffSort);
                         buffListNew[target][i].myUI.parent = buffSetInvPenal[target];
                         buffListNew[target].RemoveAt(i);
-                        return 0;
+                        // kind=2ë„ ìƒíƒœì™€ ëª©ë¡ì„ ì‚­ì œí•œ ë’¤ ê¸°ì¡´ ì¤‘ì²© ìˆ˜ë¥¼ ë°˜í™˜í•©ë‹ˆë‹¤.
+                        return kind == 2 ? removedCount : 0;
                     }
                 }
             }
@@ -2081,13 +2083,13 @@ public class MapManager : MonoBehaviour
     IEnumerator endingText(bool die)
     {
         endingPenal.GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text =
-            (die) ? "±âÀı" : "½Â¸®";
+            (die) ? "ê¸°ì ˆ" : "ìŠ¹ë¦¬";
         TextMeshProUGUI text = endingPenal.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
         text.text = "";
         string show = string.Empty;
         if (die)
         {
-            show = "´«¾ÕÀÌ ¾ÆµæÇØ Áı´Ï´Ù.";
+            show = "ëˆˆì•ì´ ì•„ë“í•´ ì§‘ë‹ˆë‹¤.";
         }
         else
         {
@@ -2095,13 +2097,13 @@ public class MapManager : MonoBehaviour
             int a = anScore();
             int j = juScore();
 
-            show = "Á¡¼ö Æò°¡\n\n(±âÈ¹,°³¹ß,±×·¡ÇÈ)'02' : ";
+            show = "ì ìˆ˜ í‰ê°€\n\n(ê¸°íš,ê°œë°œ,ê·¸ë˜í”½)'02' : ";
             show += y.ToString();
-            show += "\n(ÇÁ·Î±×·¡¹Ö)'MonamiWater' : ";
+            show += "\n(í”„ë¡œê·¸ë˜ë°)'MonamiWater' : ";
             show += j.ToString();
-            show += "\n(ÇÁ·Î±×·¡¹Ö)'artist3837' : ";
+            show += "\n(í”„ë¡œê·¸ë˜ë°)'artist3837' : ";
             show += a.ToString();
-            show += "\n\nÃÑ ÇÕ : ";
+            show += "\n\nì´ í•© : ";
             show += (y + a + j).ToString();
 
             int clearData = PlayerPrefs.GetInt("ClearData");
