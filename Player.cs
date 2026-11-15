@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
             hp += val;
             Mapm.showDmgText(0, val);
         }
-        if (hp < 1) //ÇÃ·¹ÀÌ¾î Á×À½
+        if (hp < 1) //í”Œë ˆì´ì–´ ì£½ìŒ
         {
             Mapm.ending(true);
         }
@@ -243,7 +243,7 @@ public class Player : MonoBehaviour
         Mapm.deleatAllBuff(1);
         mp = 0;
         Mapm.CheckMana(false);
-        // Ä«µå µå·Ó ¾Ö´Ï¸ÞÀÌ¼Ç
+        // ì¹´ë“œ ë“œë¡­ ì• ë‹ˆë©”ì´ì…˜
         for (int i = 0; i < Mapm.myBlocks.Length; ++i)
         {
             if (Mapm.myBlocks[i].cost != -1)

@@ -9,17 +9,17 @@ public class unknownEventST : ScriptableObject
     // Start is called before the first frame update
     public Sprite sprite;
     [TextArea(5, 20)]
-    public string situation; //»óÈ² ÅØ½ºÆ®
-    public string selectA; //¼±ÅÃÁö ÅØ½ºÆ®
+    public string situation; //ìƒí™© í…ìŠ¤íŠ¸
+    public string selectA; //ì„ íƒì§€ í…ìŠ¤íŠ¸
     public string selectB;
     public string selectC;
-    public int[] selectValA; //¼±ÅÃÁö º° Àû¿ëµÉ °ª 
-    public int[] selectValB; //¼±ÅÃÁö º° Àû¿ëµÉ °ª
-    public UnityEvent<int,int>[] selectAResult; //¼±ÅÃÁö ÀÌº¥Æ®
+    public int[] selectValA; //ì„ íƒì§€ ë³„ ì ìš©ë  ê°’ 
+    public int[] selectValB; //ì„ íƒì§€ ë³„ ì ìš©ë  ê°’
+    public UnityEvent<int,int>[] selectAResult; //ì„ íƒì§€ ì´ë²¤íŠ¸
     public UnityEvent<int,int>[] selectBResult;
-    public unknownEventST[] nextEvent; //¼±ÅÃÁö º° ´ÙÀ½ ÀÌº¥Æ®
+    public unknownEventST[] nextEvent; //ì„ íƒì§€ ë³„ ë‹¤ìŒ ì´ë²¤íŠ¸
     [TextArea(5, 20)]
-    public string[] resultString; // ¼±ÅÃÇÑ ÀÌº¥Æ® °á°ú ÅØ½ºÆ®
+    public string[] resultString; // ì„ íƒí•œ ì´ë²¤íŠ¸ ê²°ê³¼ í…ìŠ¤íŠ¸
     public Sprite[] resultSprite;
 
     public void playerHpChange(int n,int m)
@@ -147,7 +147,7 @@ public class unknownEventST : ScriptableObject
             Mapm.eventUI.GetChild(0).GetComponent<TextMeshProUGUI>().text = resultString[a];
             if (resultSprite != null) Mapm.eventUI.GetChild(1).GetComponent<Image>().sprite = resultSprite[a];
             Mapm.eventUI.GetChild(0).GetComponent<TextMeshProUGUI>().text += "\n\n" + sb.skillName + "\n" + sb.info;
-            temp.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = "È®ÀÎ";
+            temp.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = "í™•ì¸";
         }
         else
         {
@@ -172,44 +172,44 @@ public class unknownEventST : ScriptableObject
                 switch (taroCardNum)
                 {
                     case 0:
-                        name = "±Ù¿ø";
-                        infoText = "½ÃÀÛ½Ã Ä«µå¸¦ »Ì½À´Ï´Ù.";
+                        name = "ê·¼ì›";
+                        infoText = "ì‹œì‘ì‹œ ì¹´ë“œë¥¼ ë½‘ìŠµë‹ˆë‹¤.";
                         break;
                     case 1:
-                        name = "¸¶³ª";
-                        infoText = "½ÃÀÛ½Ã ¸¶³ª¸¦ È¹µæÇÕ´Ï´Ù.";
+                        name = "ë§ˆë‚˜";
+                        infoText = "ì‹œì‘ì‹œ ë§ˆë‚˜ë¥¼ íšë“í•©ë‹ˆë‹¤.";
                         break;
                     case 2:
-                        name = "¿Ïµå";
-                        infoText = "½ÃÀÛ½Ã °ñ·¥ÀÌ Ã¼·ÂÀ» ¾ò½À´Ï´Ù.";
+                        name = "ì™„ë“œ";
+                        infoText = "ì‹œì‘ì‹œ ê³¨ë¨ì´ ì²´ë ¥ì„ ì–»ìŠµë‹ˆë‹¤.";
                         break;
                     case 3:
-                        name = "¼Òµå";
-                        infoText = "½ÃÀÛ½Ã ÀûÀÌ ´õ ¿À·¡ µô·¹ÀÌ¸¦ °¡Áı´Ï´Ù.";
+                        name = "ì†Œë“œ";
+                        infoText = "ì‹œì‘ì‹œ ì ì´ ë” ì˜¤ë˜ ë”œë ˆì´ë¥¼ ê°€ì§‘ë‹ˆë‹¤.";
                         break;
                     case 4:
-                        name = "ÆæÅ¸Å¬";
-                        infoText = "½ÃÀÛ½Ã ±¤¹°À» ¾ò½À´Ï´Ù.";
+                        name = "íœíƒ€í´";
+                        infoText = "ì‹œì‘ì‹œ ê´‘ë¬¼ì„ ì–»ìŠµë‹ˆë‹¤.";
                         break;
                     case 5:
-                        name = "ÄÅ";
-                        infoText = "½ÃÀÛ½Ã ÀÇÁö¸¦ ¾ò½À´Ï´Ù.";
+                        name = "ì»µ";
+                        infoText = "ì‹œì‘ì‹œ ì˜ì§€ë¥¼ ì–»ìŠµë‹ˆë‹¤.";
                         break;
                     case 6:
-                        name = "¹Ùº¸";
-                        infoText = "½ÃÀÛ½Ã ¼øÈ¯À» ¾ò½À´Ï´Ù.";
+                        name = "ë°”ë³´";
+                        infoText = "ì‹œì‘ì‹œ ìˆœí™˜ì„ ì–»ìŠµë‹ˆë‹¤.";
                         break;
                     case 7:
-                        name = "¸¶¹ı»ç";
-                        infoText = "½ÃÀÛ½Ã ¹ÎÃ¸À» ¾ò½À´Ï´Ù.";
+                        name = "ë§ˆë²•ì‚¬";
+                        infoText = "ì‹œì‘ì‹œ ë¯¼ì²©ì„ ì–»ìŠµë‹ˆë‹¤.";
                         break;
                     case 8:
-                        name = "¿¬ÀÎ";
-                        infoText = "½ÃÀÛ½Ã Áö´ÉÀ» ¾ò½À´Ï´Ù.";
+                        name = "ì—°ì¸";
+                        infoText = "ì‹œì‘ì‹œ ì§€ëŠ¥ì„ ì–»ìŠµë‹ˆë‹¤.";
                         break;
                     case 9:
-                        name = "¼¼°è";
-                        infoText = "½ÃÀÛ½Ã Èû, ¹ÎÃ¸, Áö´ÉÀ» ¾ò½À´Ï´Ù.";
+                        name = "ì„¸ê³„";
+                        infoText = "ì‹œì‘ì‹œ í˜, ë¯¼ì²©, ì§€ëŠ¥ì„ ì–»ìŠµë‹ˆë‹¤.";
                         break;
                     default:
                         name = "";
@@ -219,7 +219,7 @@ public class unknownEventST : ScriptableObject
                 Mapm.eventUI.GetChild(0).GetComponent<TextMeshProUGUI>().text += "\n\n"+ name + "\n" + infoText;
             }
            
-            temp.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = "È®ÀÎ";
+            temp.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = "í™•ì¸";
         }
         else
         {
@@ -237,7 +237,7 @@ public class unknownEventST : ScriptableObject
             temp.GetChild(2).gameObject.SetActive(true);
             Mapm.eventUI.GetChild(0).GetComponent<TextMeshProUGUI>().text = resultString[a];
             if (resultSprite != null) Mapm.eventUI.GetChild(1).GetComponent<Image>().sprite = resultSprite[a];
-            temp.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = "È®ÀÎ";
+            temp.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = "í™•ì¸";
         }
         else
         {

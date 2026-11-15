@@ -6,11 +6,11 @@ using UnityEngine;
 public class Monster : ScriptableObject
 {
     public string mName;
-    public int mTier;   // ¸ó½ºÅÍ µî±Ş - 0 : Àû, 1 : °­Àû, 2 : ´ëÀå
+    public int mTier;   // ëª¬ìŠ¤í„° ë“±ê¸‰ - 0 : ì , 1 : ê°•ì , 2 : ëŒ€ì¥
     public int baseHp;
 
     public AnimatorOverrideController anim;
-    public enum Type { fire = 0, water, wind, earth };  // ¸ó½ºÅÍ ¼Ó¼º
-    [Header("³Ö¾îÁø ½ºÅ³ ¼ø¼­´ë·Î ½ºÅ³À» »ç¿ë, Áßº¹À¸·Î ³Ö±â °¡´É")]
-    public MonsterSkill[] skills;    // »ç¿ëÇÏ´Â ½ºÅ³
+    public enum Type { fire = 0, water, wind, earth };  // ëª¬ìŠ¤í„° ì†ì„±
+    [Header("ë„£ì–´ì§„ ìŠ¤í‚¬ ìˆœì„œëŒ€ë¡œ ìŠ¤í‚¬ì„ ì‚¬ìš©, ì¤‘ë³µìœ¼ë¡œ ë„£ê¸° ê°€ëŠ¥")]
+    public MonsterSkill[] skills;    // ì‚¬ìš©í•˜ëŠ” ìŠ¤í‚¬
 }

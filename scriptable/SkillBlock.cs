@@ -8,24 +8,24 @@ public class SkillBlock : ScriptableObject
 {
     public string skillName;
     public Monster.Type skillType;
-    public Vector3Int[] skillVal; // x - ¸¶³ª ÄÚ½ºÆ®, y µ¥¹ÌÁö, ¹öÇÁ °ª, z ¹İº¹È½¼ö
+    public Vector3Int[] skillVal; // x - ë§ˆë‚˜ ì½”ìŠ¤íŠ¸, y ë°ë¯¸ì§€, ë²„í”„ ê°’, z ë°˜ë³µíšŸìˆ˜
     public int skillTier;
-    public Target[] target;// ½ºÅ³ ´ë»ó ÇÃ·¹ÀÌ¾î, °ñ·½, Àû ´ë»óÀÎÁö ºĞ·ù
+    public Target[] target;// ìŠ¤í‚¬ ëŒ€ìƒ í”Œë ˆì´ì–´, ê³¨ë ˜, ì  ëŒ€ìƒì¸ì§€ ë¶„ë¥˜
     public UnityEvent<TriggerData>[] skillEvent;
     [TextArea(10, 20)]
     public string info;
     public EffectData[] effect;
-    public Vector3Int[] effectPos; //x,y ´ë»óÀ¸·ÎºÎÅÍÀÇ ÀÌÆåÆ® À§Ä¡  z - 0 ÇÃ·¹ÀÌ¾î, 1 °ñ·½, 2 ¸ó½ºÅÍ
+    public Vector3Int[] effectPos; //x,y ëŒ€ìƒìœ¼ë¡œë¶€í„°ì˜ ì´í™íŠ¸ ìœ„ì¹˜  z - 0 í”Œë ˆì´ì–´, 1 ê³¨ë ˜, 2 ëª¬ìŠ¤í„°
     //public string animString;
-    public int AnimNumber;  // ´©°¡ ¾Ö´Ï¸ŞÀÌ¼ÇÀ» µ¿ÀÛÇÒÁö ¼±ÅÃ
+    public int AnimNumber;  // ëˆ„ê°€ ì• ë‹ˆë©”ì´ì…˜ì„ ë™ì‘í• ì§€ ì„ íƒ
     public Sprite skillIcon;
     public AudioClip sound;
-    public Vector3 soundData;//xµô·¹ÀÌ, y¹İº¹È½¼ö
+    public Vector3 soundData;//xë”œë ˆì´, yë°˜ë³µíšŸìˆ˜
     public bool isReinforceSkill;
     public bool isFire;
     public bool boksaCard;
     public SkillBlock sb;
-    public int[] plusInfoData;  // À¯Àú¿¡°Ô ¿É¼Ç ¼³¸í ¹øÈ£
+    public int[] plusInfoData;  // ìœ ì €ì—ê²Œ ì˜µì…˜ ì„¤ëª… ë²ˆí˜¸
     public class TriggerData
     {
         public int num;
@@ -172,35 +172,35 @@ public class SkillBlock : ScriptableObject
         {
             p.golemHpAdd(-skillVal[m.num].y);
         }
-        //¾Ö´Ï¸ŞÀÌ¼Ç
+        //ì• ë‹ˆë©”ì´ì…˜
     }
     public void buffProportionAtk(TriggerData m)
     {
         MapManager Mapm = MapManager.instance;
         Player p = Mapm.player;
         Mapm.sm.APuDa(Mapm.manageBuff(MapManager.buffState.MaxHp, 1, 2) + p.checkAtk() + elementSpecial());
-        //¾Ö´Ï¸ŞÀÌ¼Ç
+        //ì• ë‹ˆë©”ì´ì…˜
     }
     public void buffProportionAtkNoConsume(TriggerData m)
     {
         MapManager Mapm = MapManager.instance;
         Player p = Mapm.player;
         Mapm.sm.APuDa(Mapm.manageBuff(MapManager.buffState.MaxHp, 1) + p.checkAtk() + elementSpecial());
-        //¾Ö´Ï¸ŞÀÌ¼Ç
+        //ì• ë‹ˆë©”ì´ì…˜
     }
     public void buffProportionAtkNoConsumeDef(TriggerData m)
     {
         MapManager Mapm = MapManager.instance;
         Player p = Mapm.player;
         Mapm.sm.APuDa(Mapm.manageBuff(MapManager.buffState.Def, 1) * skillVal[m.num].y + p.checkAtk() + elementSpecial());
-        //¾Ö´Ï¸ŞÀÌ¼Ç
+        //ì• ë‹ˆë©”ì´ì…˜
     }
     public void manaFill(TriggerData m)
     {
         MapManager Mapm = MapManager.instance;
         Player player = Mapm.player;
         player.manaAddition(skillVal[m.num].y);
-        //¾Ö´Ï¸ŞÀÌ¼Ç
+        //ì• ë‹ˆë©”ì´ì…˜
     }
     public void copiedBlockToUsedBox(TriggerData m)
     {
@@ -245,7 +245,7 @@ public class SkillBlock : ScriptableObject
         {
             p.golemHpAdd(-skillVal[m.num].y);
         }
-        //¾Ö´Ï¸ŞÀÌ¼Ç
+        //ì• ë‹ˆë©”ì´ì…˜
     }
     public void useAllSkill(TriggerData m)
     {
@@ -284,7 +284,7 @@ public class SkillBlock : ScriptableObject
         Mapm.getBuffNewVersion(MapManager.buffState.CurseBlade, skillVal[m.num].y, (int)target[m.num]);
     }
     public void reDuceHpRegenToReflect(TriggerData m)
-    {//petrification, ¼®È­
+    {//petrification, ì„í™”
         MapManager Mapm = MapManager.instance;
         int value = Mapm.manageBuff(MapManager.buffState.Reflect,1);
         value = Mathf.Min(0, -value);
@@ -324,7 +324,7 @@ public class SkillBlock : ScriptableObject
         int dmg = skillVal[m.num].y + p.checkAtk();
         p.golemHpAdd(Mathf.Max(dmg - Mapm.sm.CheckDef(), 1));
         Mapm.sm.APuDa(dmg);
-        //¾Ö´Ï¸ŞÀÌ¼Ç
+        //ì• ë‹ˆë©”ì´ì…˜
     }
     /*
     public class TriggerData
@@ -334,38 +334,38 @@ public class SkillBlock : ScriptableObject
     public void heal(TriggerData m)
     {
         if (target[m.num] == Target.golem) {
-            // ¸Ê ¸Å´ÏÀú¿¡¼­ °ñ·½ Æ÷Áö¼Ç ¾ò¾î¿Í¼­ effect[m.num]ÀÇ ÀÌÆåÆ®¸¦ Æ÷Áö¼Ç+(effectPos.x, effecrPos.y)ÀÇ À§Ä¡¿¡ Ãâ·Â
+            // ë§µ ë§¤ë‹ˆì €ì—ì„œ ê³¨ë ˜ í¬ì§€ì…˜ ì–»ì–´ì™€ì„œ effect[m.num]ì˜ ì´í™íŠ¸ë¥¼ í¬ì§€ì…˜+(effectPos.x, effecrPos.y)ì˜ ìœ„ì¹˜ì— ì¶œë ¥
             // skillVal[skill_lev] 
-            // °ñ·½ ÇöÀç Ã¼·Â ¾ò¾î¿Í¼­ ´õÇØÁÖ±â
-            // UI Ãâ·Â
+            // ê³¨ë ˜ í˜„ì¬ ì²´ë ¥ ì–»ì–´ì™€ì„œ ë”í•´ì£¼ê¸°
+            // UI ì¶œë ¥
         }
         else if (target[m.num] == Target.player)
         {
-            // ¸Ê ¸Å´ÏÀú¿¡¼­ ÇÃ·¹ÀÌ¾î Æ÷Áö¼Ç ¾ò¾î¿Í¼­ effect[m.num]ÀÇ ÀÌÆåÆ®¸¦ Æ÷Áö¼Ç+(effectPos.x, effecrPos.y)ÀÇ À§Ä¡¿¡ Ãâ·Â
-            // ÇÃ·¹ÀÌ¾î ÇöÀç Ã¼·Â ¾ò¾î¿Í¼­ ´õÇØÁÖ±â
-            // UI Ãâ·Â
+            // ë§µ ë§¤ë‹ˆì €ì—ì„œ í”Œë ˆì´ì–´ í¬ì§€ì…˜ ì–»ì–´ì™€ì„œ effect[m.num]ì˜ ì´í™íŠ¸ë¥¼ í¬ì§€ì…˜+(effectPos.x, effecrPos.y)ì˜ ìœ„ì¹˜ì— ì¶œë ¥
+            // í”Œë ˆì´ì–´ í˜„ì¬ ì²´ë ¥ ì–»ì–´ì™€ì„œ ë”í•´ì£¼ê¸°
+            // UI ì¶œë ¥
         }
     }
     public void getMana(TriggerData m)
     {
-        // skillVal[skill_lev].x ¸¸Å­ ¸¶³ª Áõ°¡
-        // UI Ãâ·Â
+        // skillVal[skill_lev].x ë§Œí¼ ë§ˆë‚˜ ì¦ê°€
+        // UI ì¶œë ¥
     }
     public void atk(TriggerData m)
     {
         Vector3 startPos;
-        Vector3 endPos;//¸ó½ºÅÍ À§Ä¡
+        Vector3 endPos;//ëª¬ìŠ¤í„° ìœ„ì¹˜
         switch (effectPos[m.num].z)
         {
-            case 0: //ÇÃ·¹ÀÌ¾î
-                //startPos = ÇÃ·¹ÀÌ¾î Æ÷Áö¼Ç + new Vetor3(effectPos[m.num].x, effectPos[m.num].y);
+            case 0: //í”Œë ˆì´ì–´
+                //startPos = í”Œë ˆì´ì–´ í¬ì§€ì…˜ + new Vetor3(effectPos[m.num].x, effectPos[m.num].y);
                 break;
-            case 1: //°ñ·½
+            case 1: //ê³¨ë ˜
                 break;
-            case 2: //¸ó½ºÅÍ
+            case 2: //ëª¬ìŠ¤í„°
                 break;
         }
-        //¿©±â¼­ ÄÚ·çÆ¾À¸·Î ÀÌÆåÆ® ½ÇÇàÇÒ¼ö ÀÖµµ·Ï ÄÚ·çÆ¾ÀÌ È£ÃâµÉ player ½ºÅ©¸³Æ®·Î startPos, endPos Àü´Ş
+        //ì—¬ê¸°ì„œ ì½”ë£¨í‹´ìœ¼ë¡œ ì´í™íŠ¸ ì‹¤í–‰í• ìˆ˜ ìˆë„ë¡ ì½”ë£¨í‹´ì´ í˜¸ì¶œë  player ìŠ¤í¬ë¦½íŠ¸ë¡œ startPos, endPos ì „ë‹¬
 
     }
     */

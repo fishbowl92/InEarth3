@@ -6,25 +6,25 @@ using UnityEngine.Events;
 public enum skillKind { BUFF = 0, ATK, SKILL };
 [CreateAssetMenu(fileName = "Monster Skill Data", menuName = "Scriptable Object/Monster Skill Data")]
 public class MonsterSkill : ScriptableObject
-{   // 0 : ¹æ¾î, 1 : ¹öÇÁ, 2~ : ½ºÅ³
+{   // 0 : ë°©ì–´, 1 : ë²„í”„, 2~ : ìŠ¤í‚¬
     public string msName;
-    public Target[] target; // ½ºÅ³ ´ë»ó ÇÃ·¹ÀÌ¾î, °ñ·½, Àû ´ë»óÀÎÁö ºĞ·ù
-    public Vector2Int[] msVal;     // x : ½ºÅ³ÀÌ Àû¿ëµÇ´Â ¼öÄ¡ , y : °ø°İÈ½¼ö
-    public int triggerTime; // ¹ßµ¿½Ã°£
+    public Target[] target; // ìŠ¤í‚¬ ëŒ€ìƒ í”Œë ˆì´ì–´, ê³¨ë ˜, ì  ëŒ€ìƒì¸ì§€ ë¶„ë¥˜
+    public Vector2Int[] msVal;     // x : ìŠ¤í‚¬ì´ ì ìš©ë˜ëŠ” ìˆ˜ì¹˜ , y : ê³µê²©íšŸìˆ˜
+    public int triggerTime; // ë°œë™ì‹œê°„
 
-    public skillKind isSkillKind;   // ¾î¶² ½ºÅ³ÀÎÁö Á¾·ù Ç¥Çö
+    public skillKind isSkillKind;   // ì–´ë–¤ ìŠ¤í‚¬ì¸ì§€ ì¢…ë¥˜ í‘œí˜„
     public UnityEvent<TriggerData>[] skillEvent;
     [TextArea(10, 20)]
     public string info;
     public Sprite skillIcon;
     public AudioClip sound;
-    [Header("y : ¹İº¹È½¼ö¸¸ ±âÀÔ, x,z´Â 0À¸·Î ÅëÀÏ")]
-    public Vector3 soundData;//xµô·¹ÀÌ, y¹İº¹È½¼ö
-    public AnimationClip anim;  // ½ºÅ³ ¾Ö´Ï¸ŞÀÌ¼Ç
-    public int[] plusInfoData;  // À¯Àú¿¡°Ô ¿É¼Ç ¼³¸í ¹øÈ£
+    [Header("y : ë°˜ë³µíšŸìˆ˜ë§Œ ê¸°ì…, x,zëŠ” 0ìœ¼ë¡œ í†µì¼")]
+    public Vector3 soundData;//xë”œë ˆì´, yë°˜ë³µíšŸìˆ˜
+    public AnimationClip anim;  // ìŠ¤í‚¬ ì• ë‹ˆë©”ì´ì…˜
+    public int[] plusInfoData;  // ìœ ì €ì—ê²Œ ì˜µì…˜ ì„¤ëª… ë²ˆí˜¸
     public class TriggerData
     {
-        public int num;     // ¹øÂ° ½ºÅ³
+        public int num;     // ë²ˆì§¸ ìŠ¤í‚¬
         public TriggerData(int number)
         {
             num = number;
@@ -36,13 +36,13 @@ public class MonsterSkill : ScriptableObject
         switch (isSkillKind)
         {
             case skillKind.ATK:
-                Mapm.monDmgKindText.text = "°ø°İ";
+                Mapm.monDmgKindText.text = "ê³µê²©";
                 break;
             case skillKind.BUFF:
-                Mapm.monDmgKindText.text = "°­È­";
+                Mapm.monDmgKindText.text = "ê°•í™”";
                 break;
             case skillKind.SKILL:
-                Mapm.monDmgKindText.text = "½ºÅ³";
+                Mapm.monDmgKindText.text = "ìŠ¤í‚¬";
                 break;
         }
     }
@@ -90,7 +90,7 @@ public class MonsterSkill : ScriptableObject
         Mapm.getBuffNewVersion(MapManager.buffState.Time, msVal[m.num].x, (int)target[m.num]);
     }
     public void AtkByHalfHp(TriggerData m)
-    {//AncientBossEnergyRelease, ±â¿î ¹æÃâ, ±â¿î¹æÃâ
+    {//AncientBossEnergyRelease, ê¸°ìš´ ë°©ì¶œ, ê¸°ìš´ë°©ì¶œ
         MapManager Mapm = MapManager.instance;
         SetMonster sm = Mapm.sm;
         int dmg = (int)sm.monCurHp / 2;
@@ -99,7 +99,7 @@ public class MonsterSkill : ScriptableObject
         Mapm.StartCoroutine(Mapm.continuousAtk(val));
     }
     public void AtkAndReduceAktBuffIfDmgToDoll(TriggerData m)
-    {//ArcherParalyzingArrow ,¸¶ºñÈ­»ì, ¸¶ºñ È­»ì
+    {//ArcherParalyzingArrow ,ë§ˆë¹„í™”ì‚´, ë§ˆë¹„ í™”ì‚´
         MapManager Mapm = MapManager.instance;
         SetMonster sm = Mapm.sm;
         int hp = Mapm.player.hp;
@@ -118,7 +118,7 @@ public class MonsterSkill : ScriptableObject
         */
     }
     public void AtkByDoublePercentDmgToDoll(TriggerData m)
-    {//AssassinBladeDance, Ä®Ãã
+    {//AssassinBladeDance, ì¹¼ì¶¤
         MapManager Mapm = MapManager.instance;
         SetMonster sm = Mapm.sm;
         Player p = Mapm.player;
@@ -127,7 +127,7 @@ public class MonsterSkill : ScriptableObject
         Mapm.StartCoroutine(Mapm.continuousAtk(val));
     }
     public void StealHalfMaxHpBuff(TriggerData m)
-    {//BloodKingControl, Áö¹è
+    {//BloodKingControl, ì§€ë°°
         MapManager Mapm = MapManager.instance;
         SetMonster sm = Mapm.sm;
         if (Mapm.manageBuff(MapManager.buffState.MaxHp, 1) != 0)
@@ -138,7 +138,7 @@ public class MonsterSkill : ScriptableObject
         }
     }
     public void AtkAndHealbyDmg(TriggerData m)
-    {//Vampiric, BloodKingSlash, BloodKingSplit, º£±â, °¡¸£±â
+    {//Vampiric, BloodKingSlash, BloodKingSplit, ë² ê¸°, ê°€ë¥´ê¸°
         MapManager Mapm = MapManager.instance;
         SetMonster sm = Mapm.sm;
         Player p = Mapm.player;
@@ -198,7 +198,7 @@ public class MonsterSkill : ScriptableObject
         SetMonster sm = Mapm.sm;
         //sm.monCurHp -= msVal[m.num].x;
         sm.APuDa(msVal[m.num].x);
-        // ¸ó½ºÅÍ »ç¸Á
+        // ëª¬ìŠ¤í„° ì‚¬ë§
         /*if (sm.monCurHp <= 0)
         {
             sm.monCurHp = 0;
@@ -206,7 +206,7 @@ public class MonsterSkill : ScriptableObject
             Mapm.reset();
             Mapm.nextEvent(new Vector3Int(1, 1, 0));
             sm.monsterDelay = 1f;
-            // (¼öÁ¤) Çàµ¿¼ö ¾÷µ¥ÀÌÆ®. ¸ÊÇÏ³ª Å¬¸®¾î(¸÷Á×ÀÏ¶§) ¸¶´Ù Çàµ¿¼ö 1Áõ°¡
+            // (ìˆ˜ì •) í–‰ë™ìˆ˜ ì—…ë°ì´íŠ¸. ë§µí•˜ë‚˜ í´ë¦¬ì–´(ëª¹ì£½ì¼ë•Œ) ë§ˆë‹¤ í–‰ë™ìˆ˜ 1ì¦ê°€
             Mapm.CheckActionCountUI();
             Mapm.showMonsterHpUI();
         }*/

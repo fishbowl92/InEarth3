@@ -6,20 +6,20 @@ using TMPro;
 
 public class SetMonster : MonoBehaviour
 {
-    public int monDex;  // Àû ¹ÎÃ¸ (¹ÎÃ¸)
-    public float monMaxHp, monCurHp;  // ¸ó½ºÅÍ ÃÖ´ëÃ¼·Â, ÇöÀçÃ¼·Â (¹æ¾îµµ)
+    public int monDex;  // ì  ë¯¼ì²© (ë¯¼ì²©)
+    public float monMaxHp, monCurHp;  // ëª¬ìŠ¤í„° ìµœëŒ€ì²´ë ¥, í˜„ì¬ì²´ë ¥ (ë°©ì–´ë„)
     public int monAddHp;
 
-    public string curSkillName; // ÇöÀç ¹ßµ¿ÁßÀÎ ½ºÅ³ ÀÌ¸§
+    public string curSkillName; // í˜„ì¬ ë°œë™ì¤‘ì¸ ìŠ¤í‚¬ ì´ë¦„
     public bool isBoss;
-    public float monSkillTriggerTime;    // ¸ó½ºÅÍ ½ºÅ³ ¹ßµ¿½Ã°£
-    public float monSkillTriggerRemainTime; // ³²Àº ¹ßµ¿½Ã°£
-    public int monSelectSkill;  // ¸ó½ºÅÍ°¡ ¼±ÅÃÇÑ ½ºÅ³¹øÈ£
-    public string monName; // ¸ó½ºÅÍ ÀÌ¸§, ÄÚµå
-    public int monTier; // 0.Àû, 1.°­Àû, 2.´ëÀå
+    public float monSkillTriggerTime;    // ëª¬ìŠ¤í„° ìŠ¤í‚¬ ë°œë™ì‹œê°„
+    public float monSkillTriggerRemainTime; // ë‚¨ì€ ë°œë™ì‹œê°„
+    public int monSelectSkill;  // ëª¬ìŠ¤í„°ê°€ ì„ íƒí•œ ìŠ¤í‚¬ë²ˆí˜¸
+    public string monName; // ëª¬ìŠ¤í„° ì´ë¦„, ì½”ë“œ
+    public int monTier; // 0.ì , 1.ê°•ì , 2.ëŒ€ì¥
     public Animator anim;
-    public bool isEnemyAction;  // ¸ó½ºÅÍ°¡ ¾×¼ÇÀ» ÃëÇß´ÂÁö ¿©ºÎ Ã¼Å©
-                                // ¾Ö´Ï¸ŞÀÌ¼Ç¿¡¼­ ¸ó½ºÅÍ ¾×¼ÇÀÌ ½ÃÇà µÇ¾ú´ÂÁö È®ÀÎ¿ë
+    public bool isEnemyAction;  // ëª¬ìŠ¤í„°ê°€ ì•¡ì…˜ì„ ì·¨í–ˆëŠ”ì§€ ì—¬ë¶€ ì²´í¬
+                                // ì• ë‹ˆë©”ì´ì…˜ì—ì„œ ëª¬ìŠ¤í„° ì•¡ì…˜ì´ ì‹œí–‰ ë˜ì—ˆëŠ”ì§€ í™•ì¸ìš©
     public MonsterSkill nowSelectSkill;
     public float checkMonMaxHp()
     {
@@ -44,7 +44,7 @@ public class SetMonster : MonoBehaviour
         isEnemyAction = true;
         monsterState = 0;
         //monSkillTriggerRemainTime = 0;
-        monSelectSkill = -1;    // Ã¹¹øÂ° ½ºÅ³ºÎÅÍ »ç¿ë
+        monSelectSkill = -1;    // ì²«ë²ˆì§¸ ìŠ¤í‚¬ë¶€í„° ì‚¬ìš©
         mm.showMonsterHpUI();
 
         GameManager.Instans.saveGameProgress(4);
@@ -63,15 +63,15 @@ public class SetMonster : MonoBehaviour
         monSkillTriggerRemainTime -= Time.deltaTime;
     }
 
-    // ¸ó½ºÅÍ »óÅÂ : 0 - ´ë±â, 1 - ½ºÅ³¹ßµ¿Áß, 2 - ¾Ö´Ï¸ŞÀÌ¼Ç½ÇÇàÁß
+    // ëª¬ìŠ¤í„° ìƒíƒœ : 0 - ëŒ€ê¸°, 1 - ìŠ¤í‚¬ë°œë™ì¤‘, 2 - ì• ë‹ˆë©”ì´ì…˜ì‹¤í–‰ì¤‘
     public int monsterState = 0;
     public float monsterDelay;
-    // ¸ó½ºÅÍ »óÅÂ Ã¼Å©
+    // ëª¬ìŠ¤í„° ìƒíƒœ ì²´í¬
     public void CheckMonster()
     {
         switch (monsterState)
         {
-            case 0: // ´ë±â»óÅÂ
+            case 0: // ëŒ€ê¸°ìƒíƒœ
                 if (monsterDelay > 0)
                 {
                     monsterDelay -= Time.deltaTime;
@@ -85,10 +85,10 @@ public class SetMonster : MonoBehaviour
                         transform.GetChild(2).GetComponent<SpriteRenderer>().sprite = null;
                         /*if(!isBoss)Mapm.nextEvent(new Vector3Int(1, 1, 0));
                         else {
-                            //¾ÆÀÌÅÛ È¹µæ // È¹µæ Á¾·áÈÄ nextEvent(new Vector3Int(1, 1, 0)); ÇÏÀÚ
+                            //ì•„ì´í…œ íšë“ // íšë“ ì¢…ë£Œí›„ nextEvent(new Vector3Int(1, 1, 0)); í•˜ì
                             isBoss = false;
                         }*/
-                        mm.nextEvent(new Vector3Int(1, 1, 0)); //¾ÆÀÌÅÛ È¹µæ ±¸Çö½Ã ÇØ´ç ÁÙ Á¦°Å
+                        mm.nextEvent(new Vector3Int(1, 1, 0)); //ì•„ì´í…œ íšë“ êµ¬í˜„ì‹œ í•´ë‹¹ ì¤„ ì œê±°
                     }
                     if (isEnemyAction == false)
                     {
@@ -104,9 +104,9 @@ public class SetMonster : MonoBehaviour
                     monsterState = 1;
                 }
                 break;
-            case 1: // ½ºÅ³¹ßµ¿Áß
+            case 1: // ìŠ¤í‚¬ë°œë™ì¤‘
                 CheckSkillTriggerTime();
-                if (monCurHp < 0)    // »ç¸Á½Ã ½ºÅ³ÀÌ ¹ßµ¿µÇÁö ¾Êµµ·Ï
+                if (monCurHp < 0)    // ì‚¬ë§ì‹œ ìŠ¤í‚¬ì´ ë°œë™ë˜ì§€ ì•Šë„ë¡
                 {
                     monsterState = 0;
                 }
@@ -131,7 +131,7 @@ public class SetMonster : MonoBehaviour
                     anim.SetTrigger(kind);
                 }
                 break;
-            case 2: // ¾Ö´Ï¸ŞÀÌ¼Ç½ÇÇàÁß
+            case 2: // ì• ë‹ˆë©”ì´ì…˜ì‹¤í–‰ì¤‘
                 if (monsterDelay > 0)
                 {
                     monsterState = 0;
@@ -141,7 +141,7 @@ public class SetMonster : MonoBehaviour
                 break;
         }
     }
-    // ÀüÅõ½Ã ¸ó½ºÅÍ°¡ ÃëÇÏ´Â Çàµ¿ ¼±ÅÃ
+    // ì „íˆ¬ì‹œ ëª¬ìŠ¤í„°ê°€ ì·¨í•˜ëŠ” í–‰ë™ ì„ íƒ
     public void MonsterSelectAction()
     {
         ++monSelectSkill;
@@ -194,18 +194,18 @@ public class SetMonster : MonoBehaviour
         }
         isEnemyAction = true;
 
-        // ¸ó½ºÅÍ°¡ »ì¾ÆÀÖ´Ù¸é ½ºÅ³ »ç¿ë ¼Ò¸® Àç»ı
+        // ëª¬ìŠ¤í„°ê°€ ì‚´ì•„ìˆë‹¤ë©´ ìŠ¤í‚¬ ì‚¬ìš© ì†Œë¦¬ ì¬ìƒ
         if (monCurHp > 0)
         {
             for (int i = 0; i < nowSelectSkill.skillEvent.Length; ++i)
             {
-                // ½ºÅ³ ÀÌº¥Æ® ¹ßµ¿
+                // ìŠ¤í‚¬ ì´ë²¤íŠ¸ ë°œë™
                 nowSelectSkill.skillEvent[i].Invoke(new MonsterSkill.TriggerData(i));
             }
             mm.atkAudio[mm.atkAudioCounter].clip = nowSelectSkill.sound;
             mm.StartCoroutine("atkAudioPlayer", new Vector3(0, 0.3f, mm.atkAudioCounter + 0.3f) + nowSelectSkill.soundData);
             mm.atkAudioCounter = (mm.atkAudioCounter + 1) % mm.atkAudio.Length;
-            // ½ºÅ³½ÃÀüÀÌ ³¡³ª°í 0.3ÃÊ ´ë±â
+            // ìŠ¤í‚¬ì‹œì „ì´ ëë‚˜ê³  0.3ì´ˆ ëŒ€ê¸°
             monsterDelay = 0.3f;
         }
     }
@@ -228,7 +228,7 @@ public class SetMonster : MonoBehaviour
     }
 
     public bool monsterDeath;
-    public void APuDa(int dmg, bool isReflected = false)  // ¸ó½ºÅÍ°¡ ÇÇÇØÀÔ¾úÀ»‹š ½ÇÇàµÇ´Â ÇÔ¼ö
+    public void APuDa(int dmg, bool isReflected = false)  // ëª¬ìŠ¤í„°ê°€ í”¼í•´ì…ì—ˆì„ë–„ ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜
     {
         int gab = mm.manageBuff(MapManager.buffState.Time, 2);
         if (gab > 0)
@@ -254,7 +254,7 @@ public class SetMonster : MonoBehaviour
                 if (gab != 0) mm.player.golemHpAdd(-gab, true);
             }
         }
-        /*Transform temp = mm.showDmg(dmg, 0); //0 -µ¥¹ÌÁö ÁÜ, 1- µ¥¹ÌÁö ¹ŞÀ½ 2- È¸º¹
+        /*Transform temp = mm.showDmg(dmg, 0); //0 -ë°ë¯¸ì§€ ì¤Œ, 1- ë°ë¯¸ì§€ ë°›ìŒ 2- íšŒë³µ
         temp.position = new Vector3(transform.position.x + Random.Range(-0.6f, -0.4f),
             transform.position.y + Random.Range(0.6f, 0.7f),
             temp.position.z);
@@ -288,7 +288,7 @@ public class SetMonster : MonoBehaviour
                     case 4:
                         if (mm.player.hp >= 20) mm.youngCounter += 2;
                         mm.ending(false);
-                        //°ÔÀÓ Å¬¸®¾î Ã³¸®
+                        //ê²Œì„ í´ë¦¬ì–´ ì²˜ë¦¬
                         break;
                 }
             }
